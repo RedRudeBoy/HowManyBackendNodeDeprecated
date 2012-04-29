@@ -1,21 +1,30 @@
 //setup Dependencies
+var rootdir = __dirname;
 var express = require('express');
 var sio = require('socket.io');
 var RedisStore = require('connect-redis')(express);
 var sessionStore = new RedisStore();
+var mongoose = require('mongoose');
 var config = require('./config.js');
 var useragent = require('./lib/useragent.js');
+var employee = require('./lib/employee.js');
+
+// Connect to data
+mongoose.connect('mongodb://localhost/' + config.dbname);
+
+// Init seed data - this may not be needed in your application
+employee.seed();
 
 //Setup Express
 var server = express.createServer();
 server.configure(function() {
     server.set('environment', config.environment);
-    server.set('views', __dirname + '/views');
+    server.set('views', rootdir + '/views');
     server.set('view options', { layout:false });
     server.use(express.bodyParser());
     server.use(express.cookieParser());
     server.use(express.session({ 'store':sessionStore, secret:config.sessionSecret }));
-    server.use(express.static(__dirname + '/static'));
+    server.use(express.static(rootdir + '/static'));
     server.use(server.router);
 });
 
@@ -59,7 +68,7 @@ io.sockets.on('connection', function(socket) {
 ///////////////////////////////////////////
 
 /////// ADD ALL YOUR ROUTES HERE  /////////
-
+// Index route - depends upon the useragent
 server.get('/', function(req, res) {
     useragent(req, res);
     console.log(req.agent);
@@ -72,6 +81,11 @@ server.get('/', function(req, res) {
     });
 });
 
+// API routes return JSON
+server.get('/employees', employee.getEmployees);
+server.get('/employees/:id', employee.getEmployee);
+server.get('/employees/:id/reports', employee.getReports);
+server.get('/employees/search/:query', employee.findByName);
 
 //A Route for Creating a 500 Error (Useful to keep around)
 server.get('/500', function(req, res) {
