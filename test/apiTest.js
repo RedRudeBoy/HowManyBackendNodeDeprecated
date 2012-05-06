@@ -3,11 +3,11 @@ var should = require('should');
 var config = require('../config.js');
 
 describe('API', function(){
-	
-	describe('Employees', function(){
 		
-	    it('should get all employees', function(done) {
-			request(config.uri + '/employees', function (err, res, body) {
+	describe('Employees', function(){
+				
+		it('should get all employees', function(done) {
+			request(config.uri + '/api/employees', function (err, res, body) {
 				should.not.exist(err);
 				var objs = JSON.parse(body);
 				should.exist(objs);
@@ -15,9 +15,9 @@ describe('API', function(){
 				done();
 			});
 		});
-		
+				
 		it('should get an employee', function(done) {
-			request(config.uri + '/employees/000000000000000000000002', function (err, res, body) {
+			request(config.uri + '/api/employees/000000000000000000000002', function (err, res, body) {
 				should.not.exist(err);
 				var obj = JSON.parse(body);
 				should.exist(obj);
@@ -28,7 +28,7 @@ describe('API', function(){
 		});
 
 		it('should get direct reports', function(done) {
-			request(config.uri + '/employees/000000000000000000000002/reports', function (err, res, body) {
+			request(config.uri + '/api/employees/000000000000000000000002/reports', function (err, res, body) {
 				should.not.exist(err);
 				var objs = JSON.parse(body);
 				should.exist(objs);
@@ -40,9 +40,9 @@ describe('API', function(){
 				done();
 			});
 		});
-		
+				
 		it('should search', function(done) {
-			request(config.uri + '/employees/search/jo', function (err, res, body) {
+			request(config.uri + '/api/employees/search/jo', function (err, res, body) {
 				should.not.exist(err);
 				var objs = JSON.parse(body);
 				should.exist(objs);
@@ -54,5 +54,5 @@ describe('API', function(){
 			});
 		});
 	});
-	
+		
 });

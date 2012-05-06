@@ -15,7 +15,7 @@ body{
 }
 
 .header{
-	background: #b2bbca url(images/navbar-bg.png) repeat-x;
+	background: #b2bbca url(/iphone/img/navbar-bg.png) repeat-x;
 	-webkit-background-size: 1px 44px;
 	-moz-background-size: 1px 44px;
 	-ms-background-size: 1px 44px;
@@ -54,11 +54,11 @@ body{
 	margin: 0;
 	text-decoration: none;
 	border-width: 2px 5px;
-	-webkit-border-image: url(images/button.png) 4 10 4 10;
-	-moz-border-image: url(images/button.png) 4 10 4 10;
-	-ms-border-image: url(images/button.png) 4 10 4 10;
-	-o-border-image: url(images/button.png) 4 10 4 10;
-	background: transparent url(images/button-active.png) no-repeat;
+	-webkit-border-image: url(/iphone/img/button.png) 4 10 4 10;
+	-moz-border-image: url(/iphone/img/button.png) 4 10 4 10;
+	-ms-border-image: url(/iphone/img/button.png) 4 10 4 10;
+	-o-border-image: url(/iphone/img/button.png) 4 10 4 10;
+	background: transparent url(/iphone/img/button-active.png) no-repeat;
 	-webkit-background-size: 0 0;
 	-moz-background-size: 0 0;
 	-ms-background-size: 0 0;
@@ -75,26 +75,26 @@ body{
 }
 
 .header-button.tappable-active button{
-	-webkit-border-image: url(images/button-active.png) 4 10 4 10;
-	-moz-border-image: url(images/button-active.png) 4 10 4 10;
-	-ms-border-image: url(images/button-active.png) 4 10 4 10;
-	-o-border-image: url(images/button-active.png) 4 10 4 10;
+	-webkit-border-image: url(/iphone/img/button-active.png) 4 10 4 10;
+	-moz-border-image: url(/iphone/img/button-active.png) 4 10 4 10;
+	-ms-border-image: url(/iphone/img/button-active.png) 4 10 4 10;
+	-o-border-image: url(/iphone/img/button-active.png) 4 10 4 10;
 }
 
 .header-back-button button{
 	padding: 0 4px 0 0;
 	border-width: 2px 4px 2px 13px;
-	-webkit-border-image: url(images/back-button.png) 4 8 4 26;
-	-moz-border-image: url(images/back-button.png) 4 8 4 26;
-	-ms-border-image: url(images/back-button.png) 4 8 4 26;
-	-o-border-image: url(images/back-button.png) 4 8 4 26;
-	background-image: url(images/back-button-active.png);
+	-webkit-border-image: url(/iphone/img/back-button.png) 4 8 4 26;
+	-moz-border-image: url(/iphone/img/back-button.png) 4 8 4 26;
+	-ms-border-image: url(/iphone/img/back-button.png) 4 8 4 26;
+	-o-border-image: url(/iphone/img/back-button.png) 4 8 4 26;
+	background-image: url(/iphone/img/back-button-active.png);
 }
 .header-back-button.tappable-active button{
-	-webkit-border-image: url(images/back-button-active.png) 4 8 4 26;
-	-moz-border-image: url(images/back-button-active.png) 4 8 4 26;
-	-ms-border-image: url(images/back-button-active.png) 4 8 4 26;
-	-o-border-image: url(images/back-button-active.png) 4 8 4 26;
+	-webkit-border-image: url(/iphone/img/back-button-active.png) 4 8 4 26;
+	-moz-border-image: url(/iphone/img/back-button-active.png) 4 8 4 26;
+	-ms-border-image: url(/iphone/img/back-button-active.png) 4 8 4 26;
+	-o-border-image: url(/iphone/img/back-button-active.png) 4 8 4 26;
 }
 
 .header-button-left{
@@ -132,11 +132,11 @@ body{
 	-webkit-box-orient: vertical;
 	-moz-box-orient: vertical;
 	box-orient: vertical;
-    position: absolute;
-    top: 80px;
+	position: absolute;
+	top: 80px;
 	bottom: 0px;
-    left: 0px;
-    right: 0px;
+	left: 0px;
+	right: 0px;
 }
 
 .scroll.striped{
@@ -262,7 +262,7 @@ body{
 	display: inline-block;
 	width: 29px;
 	height: 31px;
-	background: transparent url(images/detail-disclosure-button.png);
+	background: transparent url(/iphone/img/detail-disclosure-button.png);
 	-webkit-background-size: 58px 31px;
 	-moz-background-size: 58px 31px;
 	-ms-background-size: 58px 31px;
@@ -283,39 +283,39 @@ body{
 
 
 #content {
-    position: absolute;
-    background: #ddd;
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
+	position: absolute;
+	background: #ddd;
+	width: 100%;
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 
 .page {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: #ddd;
-    -webkit-transform:translate3d(0,0,0);
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: #ddd;
+	-webkit-transform:translate3d(0,0,0);
 }
 
 .stage-center {
-    top: 0;
-    left: 0;
+	top: 0;
+	left: 0;
 }
 
 .stage-left {
-    left: -100%;
+	left: -100%;
 }
 
 .stage-right {
-    left: 100%;
+	left: 100%;
 }
 
 .transition {
-    -moz-transition-duration: .375s;
-    -webkit-transition-duration: .375s;
-    -o-transition-duration: .375s;
+	-moz-transition-duration: .375s;
+	-webkit-transition-duration: .375s;
+	-o-transition-duration: .375s;
 }
 
 .employee-summary header{
@@ -364,7 +364,7 @@ body{
 	background-repeat: repeat-x;
 	background-position: bottom;
 
-    height: 120px;
+	height: 120px;
 }
 
 .employee-summary img {
@@ -373,11 +373,11 @@ body{
 }
 
 .action-item {
-    box-flex: 1;
+	box-flex: 1;
 }
 
 .action-icon {
-    position: absolute;
-    right: 10px;
+	position: absolute;
+	right: 10px;
 	width: 28px;
 }
