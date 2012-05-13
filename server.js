@@ -19,22 +19,22 @@ mongoose.connect('mongodb://localhost/' + config.dbname);
 employee.seed();
 
 //Setup Express
-var server = express.createServer();
-server.configure(function() {
-	server.set('environment', config.environment);
-	server.set('views', __dirname+'/views');
-	server.set('view options', { layout:false });
-	server.use(express.bodyParser());
-	server.use(express.cookieParser());
-	server.use(express.session({ 'store':sessionStore, secret:config.sessionSecret }));
-	server.use(webdir, 		express.static(__dirname+webdir));
-	server.use(iphonedir,	express.static(__dirname+iphonedir));
-	server.use(mobiledir,	express.static(__dirname+mobiledir));
-	server.use(server.router);
+var app = express.createServer();
+app.configure(function() {
+	app.set('environment', config.environment);
+	app.set('views', __dirname+'/views');
+	app.set('view options', { layout:false });
+	app.use(express.bodyParser());
+	app.use(express.cookieParser());
+	app.use(express.session({ 'store':sessionStore, secret:config.sessionSecret }));
+	app.use(webdir, 		express.static(__dirname+webdir));
+	app.use(iphonedir,	express.static(__dirname+iphonedir));
+	app.use(mobiledir,	express.static(__dirname+mobiledir));
+	app.use(app.router);
 });
 
 //setup the errors
-server.error(function(err, req, res, next) {
+app.error(function(err, req, res, next) {
 	if (err instanceof NotFound) {
 		res.render('404.jade', { locals:{
 			title:'404 - Not Found', 
@@ -52,10 +52,10 @@ server.error(function(err, req, res, next) {
 		}, status:500 });
 	}
 });
-server.listen(config.port);
+app.listen(config.port);
 
 //Setup Socket.IO
-var io = sio.listen(server);
+var io = sio.listen(app);
 io.sockets.on('connection', function(socket) {
 	console.log('Client Connected');
 	socket.on('message', function(data) {
@@ -74,25 +74,26 @@ io.sockets.on('connection', function(socket) {
 
 /////// ADD ALL YOUR ROUTES HERE  /////////
 // Index route - depends upon the useragent
-server.get('/', function(req, res) {
+app.get('/', function(req, res) {
 	useragent(req, res);
-	var index = req.agent.iOS ? iphonedir : (req.agent.mobile ? mobiledir : webdir);
+	var index = req.useragent.iOS ? iphonedir : (req.useragent.mobile ? mobiledir : webdir);
+	console.log('index: ', index);
 	res.sendfile(__dirname+index+'/index.html');
 });
 
 // API routes return JSON
-server.get('/api/employees', employee.getEmployees);
-server.get('/api/employees/:id', employee.getEmployee);
-server.get('/api/employees/:id/reports', employee.getReports);
-server.get('/api/employees/search/:query', employee.findByName);
+app.get('/api/employees', employee.getEmployees);
+app.get('/api/employees/:id', employee.getEmployee);
+app.get('/api/employees/:id/reports', employee.getReports);
+app.get('/api/employees/search/:query', employee.findByName);
 
 //A Route for Creating a 500 Error (Useful to keep around)
-server.get('/500', function(req, res) {
+app.get('/500', function(req, res) {
 	throw new Error('This is a 500 Error');
 });
 
 //The 404 Route (ALWAYS Keep this as the last route)
-server.get('/*', function(req, res) {
+app.get('/*', function(req, res) {
 	throw new NotFound();
 });
 

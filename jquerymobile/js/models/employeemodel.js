@@ -1,5 +1,6 @@
 window.Employee = Backbone.Model.extend({
 
+	idAttribute: '_id',
 	urlRoot:"/api/employees",
 
 	initialize:function () {

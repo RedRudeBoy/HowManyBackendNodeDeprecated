@@ -114,6 +114,7 @@ Backbone.sync = function(method, model, options) {
 // The Employee Model
 directory.models.Employee = Backbone.Model.extend({
 
+	idAttribute: '_id',
 	initialize: function() {
 		this.reports = new directory.models.EmployeeCollection();
 		this.reports.managerId = this.id;

@@ -4,17 +4,17 @@ window.EmployeeListView = Backbone.View.extend({
 
 	className:'nav nav-list',
 
-	initialize:function () {
+	initialize:function() {
 		var self = this;
 		this.model.bind("reset", this.render, this);
-		this.model.bind("add", function (employee) {
+		this.model.bind("add", function(employee) {
 			$(self.el).append(new EmployeeListItemView({model:employee}).render().el);
 		});
 	},
 
-	render:function (eventName) {
+	render:function(eventName) {
 		$(this.el).empty();
-		_.each(this.model.models, function (employee) {
+		_.each(this.model.models, function(employee) {
 			$(this.el).append(new EmployeeListItemView({model:employee}).render().el);
 		}, this);
 		return this;
@@ -25,13 +25,13 @@ window.EmployeeListItemView = Backbone.View.extend({
 
 	tagName:"li",
 
-	initialize:function () {
+	initialize:function() {
 		this.template = _.template(tpl.get('employee-list-item'));
 		this.model.bind("change", this.render, this);
 		this.model.bind("destroy", this.close, this);
 	},
 
-	render:function (eventName) {
+	render:function(eventName) {
 		$(this.el).html(this.template(this.model.toJSON()));
 		return this;
 	}
