@@ -12,7 +12,7 @@
 <div class="scroll striped" style="top:44px;">
 	<div class="employee-summary">
 		<header>
-			<img id="employeePic" src="/iphone/pics/<%= firstName %>_<%= lastName %>.jpg" width="100"/>
+			<img id="employeePic" src="/static/pics/<%= firstName %>_<%= lastName %>.jpg" width="100"/>
 
 			<h1><%= firstName %> <%= lastName %></h1>
 			<span class="link-text"><%= title %></span><br/>
@@ -21,12 +21,12 @@
 	</div>
 
 	<ul class="tableview tableview-links">
-		<% if (managerName) { %>
+		<% if (managerId) { %>
 		<li>
 			<a href="#employees/<%= managerId %>">
 				<div class="story">
 					<b>View Manager</b><br/>
-					<span class="metadata"><%= managerName %></span>
+					<span class="metadata">Manager</span>
 				</div>
 				<img src="/iphone/img/manager.png" class="action-icon"/>
 			</a>

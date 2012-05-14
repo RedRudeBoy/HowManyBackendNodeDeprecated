@@ -8,6 +8,7 @@ var config = require('./config.js');
 var useragent = require('./lib/useragent.js');
 var employee = require('./lib/employee.js');
 
+var staticdir = '/static';	// common content
 var webdir = '/web';
 var iphonedir = '/iphone';
 var mobiledir = '/jquerymobile';
@@ -27,7 +28,8 @@ app.configure(function() {
 	app.use(express.bodyParser());
 	app.use(express.cookieParser());
 	app.use(express.session({ 'store':sessionStore, secret:config.sessionSecret }));
-	app.use(webdir, 		express.static(__dirname+webdir));
+	app.use(staticdir, 	express.static(__dirname+staticdir));
+	app.use(webdir, 	express.static(__dirname+webdir));
 	app.use(iphonedir,	express.static(__dirname+iphonedir));
 	app.use(mobiledir,	express.static(__dirname+mobiledir));
 	app.use(app.router);
@@ -37,17 +39,17 @@ app.configure(function() {
 app.error(function(err, req, res, next) {
 	if (err instanceof NotFound) {
 		res.render('404.jade', { locals:{
-			title:'404 - Not Found', 
-			description:'', 
-			author:'', 
+			title:'404 - Not Found',
+			description:'',
+			author:'',
 			analyticssiteid:'XXXXXXX'
 		}, status:404 });
 	} else {
 		res.render('500.jade', { locals:{
-			title:'The Server Encountered an Error', 
-			description:'', 
-			author:'', 
-			analyticssiteid:'XXXXXXX', 
+			title:'The Server Encountered an Error',
+			description:'',
+			author:'',
+			analyticssiteid:'XXXXXXX',
 			error:err
 		}, status:500 });
 	}
@@ -76,7 +78,7 @@ io.sockets.on('connection', function(socket) {
 // Index route - depends upon the useragent
 app.get('/', function(req, res) {
 	useragent(req, res);
-	var index = req.useragent.iOS ? iphonedir : (req.useragent.mobile ? mobiledir : webdir);
+	var index = req.useragent.ios ? iphonedir : (req.useragent.mobile ? mobiledir : webdir);
 	console.log('index: ', index);
 	res.sendfile(__dirname+index+'/index.html');
 });

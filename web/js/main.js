@@ -46,6 +46,7 @@ var AppRouter = Backbone.Router.extend({
 
 });
 
+Backbone.Model.prototype.idAttribute = '_id';
 tpl.loadTemplates(['home', 'contact', 'header', 'employee-full', 'employee-details', 'employee-list-item'],
 	function () {
 		app = new AppRouter();
