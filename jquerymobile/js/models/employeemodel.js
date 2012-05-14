@@ -1,10 +1,10 @@
 window.Employee = Backbone.Model.extend({
 
-	idAttribute: '_id',
 	urlRoot:"/api/employees",
 
 	initialize:function () {
 		this.reports = new EmployeeCollection();
+		// Even though the actual attribute is _id, it is still accessed through id
 		this.reports.url = '/api/employees/' + this.id + '/reports';
 	}
 

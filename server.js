@@ -37,17 +37,17 @@ app.configure(function() {
 app.error(function(err, req, res, next) {
 	if (err instanceof NotFound) {
 		res.render('404.jade', { locals:{
-			title:'404 - Not Found', 
-			description:'', 
-			author:'', 
+			title:'404 - Not Found',
+			description:'',
+			author:'',
 			analyticssiteid:'XXXXXXX'
 		}, status:404 });
 	} else {
 		res.render('500.jade', { locals:{
-			title:'The Server Encountered an Error', 
-			description:'', 
-			author:'', 
-			analyticssiteid:'XXXXXXX', 
+			title:'The Server Encountered an Error',
+			description:'',
+			author:'',
+			analyticssiteid:'XXXXXXX',
 			error:err
 		}, status:500 });
 	}
@@ -76,7 +76,7 @@ io.sockets.on('connection', function(socket) {
 // Index route - depends upon the useragent
 app.get('/', function(req, res) {
 	useragent(req, res);
-	var index = req.useragent.iOS ? iphonedir : (req.useragent.mobile ? mobiledir : webdir);
+	var index = req.useragent.ios ? iphonedir : (req.useragent.mobile ? mobiledir : webdir);
 	console.log('index: ', index);
 	res.sendfile(__dirname+index+'/index.html');
 });
