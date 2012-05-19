@@ -8,6 +8,7 @@ var config = require('./config.js');
 var useragent = require('./lib/useragent.js');
 var employee = require('./lib/employee.js');
 
+var staticdir = '/static';	// common content
 var webdir = '/web';
 var iphonedir = '/iphone';
 var mobiledir = '/jquerymobile';
@@ -27,7 +28,8 @@ app.configure(function() {
 	app.use(express.bodyParser());
 	app.use(express.cookieParser());
 	app.use(express.session({ 'store':sessionStore, secret:config.sessionSecret }));
-	app.use(webdir, 		express.static(__dirname+webdir));
+	app.use(staticdir, 	express.static(__dirname+staticdir));
+	app.use(webdir, 	express.static(__dirname+webdir));
 	app.use(iphonedir,	express.static(__dirname+iphonedir));
 	app.use(mobiledir,	express.static(__dirname+mobiledir));
 	app.use(app.router);
