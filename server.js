@@ -1,10 +1,10 @@
 //setup Dependencies
+var config = require('./config.js');
 var express = require('express');
 var sio = require('socket.io');
 var RedisStore = require('connect-redis')(express);
-var sessionStore = new RedisStore();
+var sessionStore = new RedisStore(config.redis);
 var mongoose = require('mongoose');
-var config = require('./config.js');
 var useragent = require('./lib/useragent.js');
 var employee = require('./lib/employee.js');
 
@@ -14,7 +14,7 @@ var iphonedir = '/iphone';
 var mobiledir = '/jquerymobile';
 
 // Connect to data
-mongoose.connect('mongodb://localhost/' + config.dbname);
+mongoose.connect(config.mongodb);
 
 // Init seed data - this may not be needed in your application
 employee.seed();
@@ -22,7 +22,6 @@ employee.seed();
 //Setup Express
 var app = express.createServer();
 app.configure(function() {
-	app.set('environment', config.environment);
 	app.set('views', __dirname+'/views');
 	app.set('view options', { layout:false });
 	app.use(express.bodyParser());
@@ -58,6 +57,7 @@ app.listen(config.port);
 
 //Setup Socket.IO
 var io = sio.listen(app);
+io.set('log level', config.socketio.level);
 io.sockets.on('connection', function(socket) {
 	console.log('Client Connected');
 	socket.on('message', function(data) {
@@ -79,8 +79,12 @@ io.sockets.on('connection', function(socket) {
 app.get('/', function(req, res) {
 	useragent(req, res);
 	var index = req.useragent.ios ? iphonedir : (req.useragent.mobile ? mobiledir : webdir);
-	console.log('index: ', index);
-	res.sendfile(__dirname+index+'/index.html');
+	console.log('index: ', index, config.environment);
+    if ('production' === config.environment) {
+        res.render(__dirname+index+'/index.ejs')
+    } else {
+	    res.sendfile(__dirname+index+'/index.html');
+    }
 });
 
 // API routes return JSON
