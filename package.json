@@ -8,9 +8,11 @@
 		"express":"2.x.x",
 		"connect-redis" : ">=1.3.0",
 		"jade":">=0.24.0",
-		"mongoose":">=2.5.14",
-		"socket.io":">=0.9.5"
-	},
+        "ejs" : ">=0.7.1",
+        "mongoose":">=2.5.14",
+        "socket.io":">=0.9.5",
+        "connect-assetmanager":">=0.0.27"
+    },
 	"devDependencies":{
 		"vows":">=0.6.2",
 		"mocha":">=1.0.1",
