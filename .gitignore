@@ -8,3 +8,4 @@ rms.ipr
 rms.iws
 .idea/
 node_modules/
+npm-debug.log

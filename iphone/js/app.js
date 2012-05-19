@@ -233,7 +233,7 @@ directory.Router = Backbone.Router.extend({
 	},
 
 	directReports: function(id) {
-		var employee = new directory.models.Employee({_id: parseInt(id)});
+		var employee = new directory.models.Employee({_id: id});
 		employee.reports.fetch();
 		this.slidePage(new directory.views.DirectReportPage({model: employee.reports}).render());
 	},
