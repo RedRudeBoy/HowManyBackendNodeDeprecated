@@ -1,10 +1,10 @@
 //setup Dependencies
 var config = require('./config.js');
 var express = require('express');
-var sio = require('socket.io');
 var RedisStore = require('connect-redis')(express);
 var sessionStore = new RedisStore(config.redis);
 var mongoose = require('mongoose');
+
 var useragent = require('./lib/useragent.js');
 var employee = require('./lib/employee.js');
 
@@ -19,19 +19,30 @@ mongoose.connect(config.mongodb);
 // Init seed data - this may not be needed in your application
 employee.seed();
 
-//Setup Express
+// Setup server
 var app = express.createServer();
+app.listen(config.port);
+var io = require('./lib/chat.js')(app);
+var assetMiddleware = require('./lib/asset.js');
 app.configure(function() {
 	app.set('views', __dirname+'/views');
 	app.set('view options', { layout:false });
 	app.use(express.bodyParser());
 	app.use(express.cookieParser());
-	app.use(express.session({ 'store':sessionStore, secret:config.sessionSecret }));
+    app.use(assetMiddleware);
+    app.use(express.session({ 'store':sessionStore, secret:config.sessionSecret }));
 	app.use(staticdir, 	express.static(__dirname+staticdir));
 	app.use(webdir, 	express.static(__dirname+webdir));
 	app.use(iphonedir,	express.static(__dirname+iphonedir));
 	app.use(mobiledir,	express.static(__dirname+mobiledir));
 	app.use(app.router);
+});
+
+// Make assets available to index.ejs
+app.dynamicHelpers({
+    'assetsCache': function(req, res) {
+        return assetMiddleware.cacheHashes;
+    }
 });
 
 //setup the errors
@@ -52,21 +63,6 @@ app.error(function(err, req, res, next) {
 			error:err
 		}, status:500 });
 	}
-});
-app.listen(config.port);
-
-//Setup Socket.IO
-var io = sio.listen(app);
-io.set('log level', config.socketio.level);
-io.sockets.on('connection', function(socket) {
-	console.log('Client Connected');
-	socket.on('message', function(data) {
-		socket.broadcast.emit('server_message', data);
-		socket.emit('server_message', data);
-	});
-	socket.on('disconnect', function() {
-		console.log('Client Disconnected.');
-	});
 });
 
 
