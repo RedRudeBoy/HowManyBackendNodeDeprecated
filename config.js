@@ -17,6 +17,6 @@ module.exports = {
 };
 
 if (module.exports.environment == 'production') {
-	module.exports.uri = 'http://yourname.no.de';
 	module.exports.port = process.env.PORT || 80; // Joyent SmartMachine uses process.env.PORT
+    module.exports.uri = 'http://localhost:'+module.exports.port;
 }

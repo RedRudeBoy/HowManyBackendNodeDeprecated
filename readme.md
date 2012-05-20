@@ -2,6 +2,9 @@
 
 It is a sample project for a Node/HTML5 application optimized separately for desktop browsers (web), generic mobile platforms using jQuery Mobile (jquerymobile) and iPhone (iphone). Its server side project is based on [robrighter / node-boilerplate](https://github.com/robrighter/node-boilerplate) and its client side projects are based on [ccoenraets / backbone-directory](https://github.com/ccoenraets/backbone-directory).
 
+### [Try It Here](http://nodebackbone-vinkaga.dotcloud.com/) ###
+Try it out for different devices using Google Chrome's built-in user-agent switcher. [Read more.](http://www.learnwithnirab.com/2012/01/how-to-use-google-chromes-built-in-user.html)
+
 ## Goals ##
 1. Quickly get started with a Node/Backbone application
 2. Optimize separately for browsers, iphone and other mobile devices
@@ -44,13 +47,10 @@ There are four versions of the application available in this repository:
 
 1. Backbone.js + Twitter Bootstrap (located in the [/web](https://github.com/vinkaga/node-backbone/tree/master/web) directory). This version adds primitive chat to the pages.
 	- Read more about original MySQL version [here](http://coenraets.org/blog/2012/02/sample-app-with-backbone-js-and-twitter-bootstrap/)
-	- Try original MySQL version [here](http://coenraets.org/directory/)
 2. Backbone.js + jQuery Mobile (located in the [/jquerymobile](https://github.com/vinkaga/node-backbone/tree/master/jquerymobile) directory).
 	- Read more about original MySQL version [here](http://coenraets.org/blog/2012/03/employee-directory-sample-app-with-backbone-js-and-jquery-mobile/)
-	- Try original MySQL version [here](http://coenraets.org/backbone/directory/jquerymobile/)
 3. Backbone.js + native-looking iPhone skins (located in the [/iphone](https://github.com/vinkaga/node-backbone/tree/master/iphone) directory).
 	- Read more about original MySQL version [here](http://coenraets.org/blog/2012/03/crafting-native-looking-ios-apps-with-html-backbone-js-and-phonegap/)
-	- Try original MySQL version [here](http://coenraets.org/backbone/directory/iphone/)
 4. Backbone.js + native-looking iPhone skins and a local database implementation (located in the [/localdb](https://github.com/vinkaga/node-backbone/tree/master/localdb) directory).
     - NOT DEBUGGED
 	- Read more about original MySQL version [here](http://coenraets.org/blog/2012/04/building-mobile-apps-with-html-and-a-local-database/)
