@@ -29,8 +29,8 @@ app.configure(function() {
 	app.set('view options', { layout:false });
 	app.use(express.bodyParser());
 	app.use(express.cookieParser());
-    app.use(assetMiddleware);
-    app.use(express.session({ 'store':sessionStore, secret:config.sessionSecret }));
+	app.use(assetMiddleware);
+	app.use(express.session({ 'store':sessionStore, secret:config.sessionSecret }));
 	app.use(staticdir, 	express.static(__dirname+staticdir));
 	app.use(webdir, 	express.static(__dirname+webdir));
 	app.use(iphonedir,	express.static(__dirname+iphonedir));
@@ -40,9 +40,12 @@ app.configure(function() {
 
 // Make assets available to index.ejs
 app.dynamicHelpers({
-    'assetsCache': function(req, res) {
-        return assetMiddleware.cacheHashes;
-    }
+	'assetsCache': function(req, res) {
+		return assetMiddleware.cacheHashes;
+	},
+	'isProduction': function(req, res) {
+		return 'production' === config.environment;
+	}
 });
 
 //setup the errors
@@ -76,11 +79,7 @@ app.get('/', function(req, res) {
 	useragent(req, res);
 	var index = req.useragent.ios ? iphonedir : (req.useragent.mobile ? mobiledir : webdir);
 	console.log('index: ', index, config.environment);
-    if ('production' === config.environment) {
-        res.render(__dirname+index+'/index.ejs')
-    } else {
-	    res.sendfile(__dirname+index+'/index.html');
-    }
+	res.render(__dirname+index+'/index.ejs')
 });
 
 // API routes return JSON
