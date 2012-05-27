@@ -29,6 +29,7 @@ app.configure(function() {
 	app.set('view options', { layout:false });
 	app.use(express.bodyParser());
 	app.use(express.cookieParser());
+	app.use(express.staticCache());
 	app.use(assetMiddleware);
 	app.use(express.session({ 'store':sessionStore, secret:config.sessionSecret }));
 	app.use(staticdir, 	express.static(__dirname+staticdir));
