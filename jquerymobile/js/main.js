@@ -52,9 +52,11 @@ var AppRouter = Backbone.Router.extend({
 
 });
 
-Backbone.Model.prototype.idAttribute = '_id';
-tpl.loadTemplates(['search-page', 'report-list', 'employee-details', 'employee-list-item'],
-    function () {
-        app = new AppRouter();
-        Backbone.history.start();
-    });
+$(document).ready(function () {
+	Backbone.Model.prototype.idAttribute = '_id';
+	tpl.loadTemplates(['search-page', 'report-list', 'employee-details', 'employee-list-item'],
+		function () {
+			app = new AppRouter();
+			Backbone.history.start();
+		});
+});
