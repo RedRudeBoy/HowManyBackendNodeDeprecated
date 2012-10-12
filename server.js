@@ -6,23 +6,24 @@ var sessionStore = new RedisStore(config.redis);
 var mongoose = require('mongoose');
 
 var useragent = require('./lib/useragent.js');
-var employee = require('./lib/employee.js');
+//var employee = require('./lib/employee.js'); //Remove it!
 
 var staticdir = '/static';	// common content
 var webdir = '/web';
-var iphonedir = '/iphone';
-var mobiledir = '/jquerymobile';
+//var iphonedir = '/iphone';
+//var mobiledir = '/jquerymobile';
+var mobiledir, iphonedir = '/iUI'; //I preffer iUI
 
 // Connect to data
 mongoose.connect(config.mongodb);
 
 // Init seed data - this may not be needed in your application
-employee.seed();
+//employee.seed();  //Remove it!
 
 // Setup server
 var app = express.createServer();
 app.listen(config.port);
-var io = require('./lib/chat.js')(app);
+var io = require('./lib/chat.js')(app);  //Remove it?
 var assetMiddleware = require('./lib/asset.js');
 app.configure(function() {
 	app.set('views', __dirname+'/views');
@@ -34,7 +35,7 @@ app.configure(function() {
 	app.use(express.session({ 'store':sessionStore, secret:config.sessionSecret }));
 	app.use(staticdir, 	express.static(__dirname+staticdir));
 	app.use(webdir, 	express.static(__dirname+webdir));
-	app.use(iphonedir,	express.static(__dirname+iphonedir));
+//	app.use(iphonedir,	express.static(__dirname+iphonedir));
 	app.use(mobiledir,	express.static(__dirname+mobiledir));
 	app.use(app.router);
 });
@@ -83,11 +84,17 @@ app.get('/', function(req, res) {
 	res.render(__dirname+index+'/index.ejs')
 });
 
-// API routes return JSON
-app.get('/api/employees', employee.getEmployees);
-app.get('/api/employees/:id', employee.getEmployee);
-app.get('/api/employees/:id/reports', employee.getReports);
-app.get('/api/employees/search/:query', employee.findByName);
+// API routes return JSON  //Remove it!
+//app.get('/api/employees', employee.getEmployees);
+//app.get('/api/employees/:id', employee.getEmployee);
+//app.get('/api/employees/:id/reports', employee.getReports);
+//app.get('/api/employees/search/:query', employee.findByName);
+
+
+app.get('/login', function(req, res) {
+	console.log('trying to login... this is cute! xD');
+	res.redirect('/');
+});
 
 //A Route for Creating a 500 Error (Useful to keep around)
 app.get('/500', function(req, res) {
