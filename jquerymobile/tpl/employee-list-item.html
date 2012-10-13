@@ -2,6 +2,6 @@
 	<img src="/static/pics/<%= firstName %>_<%= lastName %>.jpg"/>
 	<h4><%= firstName %> <%= lastName %></h4>
 	<p><%= title %></p>
-	<span class="ui-li-count"><%= reportCount %></span>
+	<span class="ui-li-count"><% if (typeof reportCount != 'undefined') { %><%= reportCount %><% } %></span>
 </a>
 

@@ -24,6 +24,8 @@
 		"socket.io":">=0.9.5",
 		"connect-assetmanager":">=0.0.27",
 		"connect-assetmanager-handlers" : ">=0.0.18"
+//		,"passport": "x"
+//		,"passport-local"
 	},
 	"devDependencies":{
 		"vows":">=0.6.2",

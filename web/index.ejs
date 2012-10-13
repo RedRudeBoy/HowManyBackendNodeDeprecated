@@ -48,16 +48,16 @@
 
 <% if (isProduction) { %>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script>!window.jQuery && document.write('<script src="/web/lib/jquery-1.7.2.min.js"><\/script>')</script>
+	<script>!window.jQuery && document.write('<script src="/static/js/jquery-1.7.2.min.js"><\/script>')</script>
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="/web/js/cache/<%=assetsCache.webjs||0%>/client.js"></script>
 <% } else { %>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
-	<script>!window.jQuery && document.write('<script src="/web/lib/jquery-1.7.2.js"><\/script>')</script>
+	<script>!window.jQuery && document.write('<script src="/static/js/jquery-1.7.2.js"><\/script>')</script>
 	<script src="/socket.io/socket.io.js"></script>
-	<script src="/web/lib/underscore.js"></script>
-	<script src="/web/lib/backbone.js"></script>
-	<script src="/web/lib/bootstrap-dropdown.js"></script>
+	<script src="/static/js/underscore.js"></script>
+	<script src="/static/js/backbone.js"></script>
+	<script src="/static/js/bootstrap-dropdown.js"></script>
 	<script src="/web/js/utils.js"></script>
 	<script src="/web/js/models/employeemodel.js"></script>
 	<script src="/web/js/views/header.js"></script>
