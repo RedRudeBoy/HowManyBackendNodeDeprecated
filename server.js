@@ -8,12 +8,73 @@ var mongoose = require('mongoose');
 var useragent = require('./lib/useragent.js');
 var employee = require('./lib/employee.js'); //Remove it!
 
+//Login
+//@todo: change this!
+var users = [
+	{ id: 1, username: 'bob', password: 'bob', email: 'bob@example.com' },
+	{ id: 2, username: 'joe', password: 'joe', email: 'joe@example.com' }
+];
+
+function findById(id, fn) {
+	var idx = id - 1;
+	if (users[idx]) fn(null, users[idx]);
+	else fn(new Error('User ' + id + ' does not exist'));
+}
+
+function findByUsername(username, fn) {
+	for (var i = 0, len = users.length; i < len; i++) {
+		var user = users[i];
+		if (user.username === username) {
+			return fn(null, user);
+		}
+	}
+	return fn(null, null);
+}
+
+var passport = require('passport')
+	, LocalStrategy = require('passport-local').Strategy;
+
+// Use the LocalStrategy within Passport.
+//   Strategies in passport require a `verify` function, which accept
+//   credentials (in this case, a username and password), and invoke a callback
+//   with a user object.  In the real world, this would query a database;
+//   however, in this example we are using a baked-in set of users.
+passport.use(new LocalStrategy(
+	function(username, password, done) {
+	// asynchronous verification, for effect...
+		process.nextTick(function () {
+		// Find the user by username.  If there is no user with the given
+		// username, or the password is not correct, set the user to `false` to
+		// indicate failure and set a flash message.  Otherwise, return the
+		// authenticated `user`.
+			findByUsername(username, function(err, user) {
+				if (err) { return done(err); }
+				if (!user) { return done(null, false, { message: 'Unknown user ' + username }); }
+				if (user.password != password) { return done(null, false, { message: 'Invalid password' }); }
+				return done(null, user);
+			})
+		});
+	}
+));
+
+//If no session is required
+passport.serializeUser(function(user, done) {
+	done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+	findById(id, function (err, user) {
+		done(err, user);
+	});
+});
+//remove until here
+
 var staticdir = '/static';	// common content
 var webdir = '/web';
 //var iphonedir = '/iphone';
 //var mobiledir = '/jquerymobile';
 var mobiledir = '/iUI';
-var iphonedir = '/jquerymobile';
+var iphonedir = '/iUI';
 //I preffer iUI
 
 // Connect to data
@@ -29,13 +90,15 @@ var io = require('./lib/chat.js')(app);  //Remove it?
 var assetMiddleware = require('./lib/asset.js');
 app.configure(function() {
 	app.set('views', __dirname+'/views');
-	app.set('view options', { layout:false });
+	app.set('view options', {layout:false});
 	//Login?
 	app.use(express.bodyParser());
 	app.use(express.cookieParser());
 	app.use(express.staticCache());
 	app.use(assetMiddleware);
-	app.use(express.session({ 'store':sessionStore, secret:config.sessionSecret }));
+	app.use(express.session({'store':sessionStore, secret:config.sessionSecret}));
+	app.use(passport.initialize());
+	app.use(passport.session()); //For persistent login sessions
 	app.use(staticdir, 	express.static(__dirname+staticdir));
 	app.use(webdir, 	express.static(__dirname+webdir));
 	app.use(iphonedir,	express.static(__dirname+iphonedir));
@@ -56,20 +119,20 @@ app.dynamicHelpers({
 //setup the errors
 app.error(function(err, req, res, next) {
 	if (err instanceof NotFound) {
-		res.render('404.jade', { locals:{
+		res.render('404.jade', {locals:{
 			title:'404 - Not Found',
 			description:'',
 			author:'',
 			analyticssiteid:'XXXXXXX'
-		}, status:404 });
+		}, status:404});
 	} else {
-		res.render('500.jade', { locals:{
+		res.render('500.jade', {locals:{
 			title:'The Server Encountered an Error',
 			description:'',
 			author:'',
 			analyticssiteid:'XXXXXXX',
 			error:err
-		}, status:500 });
+		}, status:500});
 	}
 });
 
@@ -91,18 +154,34 @@ app.get('/', function(req, res) {
 
 
 /////// API routes return JSON	///////////
-//app.get('/calendar',calendar);
+app.post('/login',
+	function(req,res,next) {
+		console.log('login try');
+//		console.log(req);
+//		console.log(res);
+//		console.log(typeof next);
+		next();
+	},
+	passport.authenticate('local'),
+//	{
+//		successRedirect: '/logged',
+//		failureRedirect: '/loginFail',
+//		failureFlash: true
+//	},
+	function(req, res) {
+    // If this function gets called, authentication was successful.
+    // `req.user` property contains the authenticated user.
+//		app.get('/calendar',calendar);
+		console.log('Login correct!!!');
+		console.log(req.user);
+		res.redirect('/logged2');
+	}
+);
 
 app.get('/api/employees', employee.getEmployees);
 app.get('/api/employees/:id', employee.getEmployee);
 app.get('/api/employees/:id/reports', employee.getReports);
 app.get('/api/employees/search/:query', employee.findByName);
-
-
-app.get('/login', function(req, res) {
-	console.log('trying to login... this is cute! xD');
-	res.redirect('/');
-});
 
 //A Route for Creating a 500 Error (Useful to keep around)
 app.get('/500', function(req, res) {

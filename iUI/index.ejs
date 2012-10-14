@@ -26,18 +26,18 @@
 		<h1>Hello World</h1>
 		<a href="#index">Back to index</a>
 	</div>
-	<form id="login" title="Login" class="panel" name="formname" action="/login" method="get">
+	<form id="login" title="Login" class="panel" name="loginform" action="/login" method="post">
 		<fieldset>
 			<div class="row">
 				<label>Login</label>
-				<input type="text" name="ident" placeholder="username">
+				<input type="text" name="username" placeholder="username">
 			</div>
 			<div class="row">
 				<label>Password</label>
 				<input type="password" name="password" placeholder="password">
 			</div>
 		</fieldset>
-		<a class="whiteButton" href="javascript:formname.submit()">Login me in!</a>
+		<a class="whiteButton" href="javascript:loginform.submit()">Login me in!</a>
 	</form>
 </body>
 </html>
