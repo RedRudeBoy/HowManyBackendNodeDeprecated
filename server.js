@@ -6,10 +6,10 @@ var sessionStore = new RedisStore(config.redis);
 var mongoose = require('mongoose');
 
 var useragent = require('./lib/useragent.js');
-var employee = require('./lib/employee.js'); //Remove it!
+//var employee = require('./lib/employee.js'); //Remove it!
 
 //Login
-//@todo: change this!
+//@todo: change this for the modelUsers!
 var users = [
 	{ id: 1, username: 'bob', password: 'bob', email: 'bob@example.com' },
 	{ id: 2, username: 'joe', password: 'joe', email: 'joe@example.com' }
@@ -43,6 +43,7 @@ passport.use(new LocalStrategy(
 	function(username, password, done) {
 	// asynchronous verification, for effect...
 		process.nextTick(function () {
+			//@todo: Change this
 		// Find the user by username.  If there is no user with the given
 		// username, or the password is not correct, set the user to `false` to
 		// indicate failure and set a flash message.  Otherwise, return the
@@ -81,7 +82,8 @@ var iphonedir = '/iUI';
 mongoose.connect(config.mongodb);
 
 // Init seed data - this may not be needed in your application
-employee.seed();  //Remove it!
+//employee.seed();  //Remove it!
+//require('./lib/Models/Populate').populate();
 
 // Setup server
 var app = express.createServer();
@@ -178,10 +180,13 @@ app.post('/login',
 	}
 );
 
-app.get('/api/employees', employee.getEmployees);
-app.get('/api/employees/:id', employee.getEmployee);
-app.get('/api/employees/:id/reports', employee.getReports);
-app.get('/api/employees/search/:query', employee.findByName);
+//Resource Routing in a separate module, just for keep the code clean
+routes = require('./lib/Models/Routing')(app);
+
+//app.get('/api/employees', employee.getEmployees);
+//app.get('/api/employees/:id', employee.getEmployee);
+//app.get('/api/employees/:id/reports', employee.getReports);
+//app.get('/api/employees/search/:query', employee.findByName);
 
 //A Route for Creating a 500 Error (Useful to keep around)
 app.get('/500', function(req, res) {
