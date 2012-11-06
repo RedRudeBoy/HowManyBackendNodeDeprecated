@@ -1,6 +1,7 @@
 {
+	//"name":"HowMany",
 	"name":"node-backbone",
-	"description":"how many",
+	"description":"How Many Days has it been since...",
 	"author": "we <we@we.we>",
 	"version":"0.0.1",
 	"contributors": [
@@ -43,15 +44,29 @@
 		"socket.io":">=0.9.5"
 //		"requirejs": ">=1.0.0",		//Use require in the browser
 	},
-	"mappings":{
+	"mappings": {
 		"express-mongoose-resource": "https://github.com/panta/express-mongoose-resource"
 	},
-	"devDependencies":{
+	"devDependencies": {
 		"vows":">=0.6.2",
 		"mocha":">=1.0.1",
 		"should":">=0.6.1",
 		"request":">=2.9.x",
 		"soda":">=0.2.5"
 	},
-	"engine":"node >= 0.6.12"
+	"engine":"node >= 0.6.12",
+	"keywords": [
+		"HowMany",
+		"HowManyDays",
+		"rest",
+		"vcal",
+		"mongoose",
+		"mongodb",
+		"node",
+		"node-backbone",
+		"jQueryMobile",
+		"express",
+		"connect",
+		"assetmanager"
+	]
 }

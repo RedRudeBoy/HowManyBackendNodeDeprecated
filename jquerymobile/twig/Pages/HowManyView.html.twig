@@ -1,0 +1,53 @@
+{# Path: RedRudeBoy/HowManyBundle/Resources/views/Pages/HowManyView.html.twig #}
+{# TwigPath: RedRudeBoyHowManyBundle:Pages:HowManyView.html.twig #}
+{% extends 'RedRudeBoyHowManyBundle:MobileBase:MobileBasePage.html.twig' %}
+
+{% set id, theme = 'HowManyView', 'a' %}
+
+{% if title is not defined %}
+	{% set title = 'HowManyName' %}
+{% endif %}
+
+{% if user is not defined %}
+	{% set user = 'me' %}
+{% endif %}
+
+{% if defaultDuration is not defined %}
+	{% set defaultDuration = 0 %}
+{% endif %}
+
+
+{% block header %}
+	<a href="#HowManyLi" data-icon="back" data-iconpos="notext" data-direction="reverse"></a>
+	<a href="#HowManyConf" data-icon="gear" data-iconpos="notext" class="ui-btn-right"></a>
+{% endblock %}
+
+{% block content %}
+	<div class="content-primary">
+		<label><input type="checkbox" /><a href="#Congratulations" data-transition="slideup">I've done it!!</a></label>
+			
+		<label for="note">Note:</label>
+		<textarea name="note" id="note">
+		</textarea>
+		
+		<fieldset class="ui-grid-a">
+			<div class="ui-block-a">
+				<div data-role="fieldcontain">
+					<label for="duration">Duration</label>
+					<input type="range" name="duration" id="duration" value="{{ defaultDuration }}" min="0" max="90"/>
+				</div>
+			</div>
+			<div class="ui-block-b">
+				<div data-role="fieldcontain">
+					<label for="user">User: </label>
+					<input type="text" name="user" id="user" value="{{ user }}"  />
+				</div>
+			</div>	   
+		</fieldset>
+		
+		<div data-role="collapsible">
+			<h3>History</h3>
+			<p>Blablabla....</p>
+		</div>
+	</div>
+{% endblock %}

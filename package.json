@@ -1,6 +1,6 @@
 {
 	"name":"node-backbone",
-	"description":"how many",
+	"description":"How Many Days has it been since...",
 	"author": "we <we@we.we>",
 	"version":"0.0.1",
 	"contributors": [
@@ -21,6 +21,7 @@
 		"connect-assetmanager-handlers" : ">=0.0.18",
 		"jade":">=0.24.0",
 		"ejs" : ">=0.7.1",
+		"twig": "*",
 		"passport": "*",
 		"passport-local": "*",
 		"connect-redis" : ">=1.3.0",
@@ -30,15 +31,31 @@
 		"bson": ">=0.0.4",
 		"socket.io":">=0.9.5"
 	},
-	"mappings":{
-		"express-mongoose-resource": "https://github.com/panta/express-mongoose-resource"
-	},
-	"devDependencies":{
+	"devDependencies": {
 		"vows":">=0.6.2",
 		"mocha":">=1.0.1",
 		"should":">=0.6.1",
 		"request":">=2.9.x",
 		"soda":">=0.2.5"
 	},
-	"engine":"node >= 0.6.12"
+	"test": "make test",
+	"mappings": {
+		"express-mongoose-resource": "https://github.com/panta/express-mongoose-resource",
+		"twig": "https://github.com/justjohn/twig.js"
+	},
+	"engine":"node >= 0.6.12",
+	"keywords": [
+		"HowMany",
+		"HowManyDays",
+		"rest",
+		"vcal",
+		"mongoose",
+		"mongodb",
+		"node",
+		"node-backbone",
+		"jQueryMobile",
+		"express",
+		"connect",
+		"assetmanager"
+	]
 }

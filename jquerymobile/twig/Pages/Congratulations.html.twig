@@ -1,0 +1,19 @@
+{# Path: RedRudeBoy/HowManyBundle/Resources/views/Pages/Congratulations.html.twig #}
+{# TwigPath: RedRudeBoyHowManyBundle:Pages:Congratulations.html.twig #}
+{% extends 'RedRudeBoyHowManyBundle:MobileBase:MobileBasePage.html.twig' %}
+
+{% set id, title, theme = 'Congratulations', 'Congratulations!!!', 'a' %}
+
+
+{% block header %}
+<a href="#HowManyLi" data-icon="back" data-iconpos="notext" data-transition="slidedown"></a>
+<a href="#share" data-icon="star" class="ui-btn-right">Share</a>
+{% endblock %}
+
+{% block content %}
+<div class="content-primary">
+	<div data-inset="true">
+		<h3>Congratulations!!!</h3>
+	</div>
+</div>
+{% endblock %}
