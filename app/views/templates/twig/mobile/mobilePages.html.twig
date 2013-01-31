@@ -1,0 +1,84 @@
+{# Path: RedRudeBoy/HowManyBundle/Resources/views/mobilePages.html.twig #}
+{# TwigPath: RedRudeBoyHowManyBundle::mobilePages.html.twig #}
+<!DOCTYPE html>
+<html>
+	<head>
+		{% block headconf %}
+			<meta charset="utf-8">
+			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+			<title>{% block title %}How Many Days{% endblock %}</title>
+		{% endblock %}
+		
+		{% stylesheets
+			'@RedRudeBoyHowManyBundle/Resources/public/jQuery/css/jquery.mobile-1.1.0.css'
+			'@RedRudeBoyHowManyBundle/Resources/public/jQuery/themes/jquerymobile/jquery.mobile.theme-1.1.0.min.css'
+			filter='cssrewrite'
+			output='css.css'
+		%}
+			<link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="all" />
+		{% endstylesheets %}
+		
+		{% javascripts
+			'@RedRudeBoyHowManyBundle/Resources/public/jQuery/js/jquery-1.7.2.min.js'
+			'@RedRudeBoyHowManyBundle/Resources/public/HowManyMobile.js'
+			'@RedRudeBoyHowManyBundle/Resources/public/jQuery/js/jquery.mobile-1.1.0.min.js'
+			output='js.js'
+		%}
+			<script src="{{ asset_url }}" type="text/javascript"></script>
+		{% endjavascripts %}
+	</head>
+	
+    <body>
+{#	include all the pages, and download all the app #}
+		{% include 'RedRudeBoyHowManyBundle:Pages:HowManyLi.html.twig' %}
+		{% include 'RedRudeBoyHowManyBundle:Pages:HowManyView.html.twig' %}
+		{% include 'RedRudeBoyHowManyBundle:Pages:Congratulations.html.twig' %}
+		{% include 'RedRudeBoyHowManyBundle:Pages:HowManyCRUD.html.twig' %}
+		{% include 'RedRudeBoyHowManyBundle:Pages:HowManyConf.html.twig' %}
+		{% include 'RedRudeBoyHowManyBundle:Pages:ProfilesLi.html.twig' %}
+		{% include 'RedRudeBoyHowManyBundle:Pages:ProfilesConf.html.twig' %}
+		{% include 'RedRudeBoyHowManyBundle:Pages:ProfilesCRUD.html.twig' %}
+{#
+        <div id="symfony-wrapper">
+            <div id="symfony-header">
+                <a href="{{ path('welcome') }}">
+                    <img src="{{ asset('bundles/RedRudeBoyHowMany/images/logo.gif') }}" alt="Symfony">
+                </a>
+                <form id="symfony-search" method="GET" action="http://symfony.com/search">
+                    <label for="symfony-search-field"><span>Search on Symfony Website</span></label>
+                    <input name="q" id="symfony-search-field" type="search" placeholder="Search on Symfony website" class="medium_txt">
+                    <input type="submit" class="symfony-button-grey" value="OK" />
+                </form>
+            </div>
+
+            {% if app.session.flash('notice') %}
+                <div class="flash-message">
+                    <em>Notice</em>: {{ app.session.flash('notice') }}
+                </div>
+            {% endif %}
+
+            {% block content_header %}
+                <ul id="menu">
+                    {% block content_header_more %}
+                        <li><a href="{{ path('welcome') }}">Demo Home</a></li>
+                    {% endblock %}
+                </ul>
+
+                <div style="clear: both"></div>
+            {% endblock %}
+
+            <div class="symfony-content">
+                {% block content %}
+                {% endblock %}
+            </div>
+
+            {% if code is defined %}
+                <h2>Code behind this page</h2>
+                <div class="symfony-content">{{ code|raw }}</div>
+            {% endif %}
+#}
+        </div>
+    </body>
+</html>
