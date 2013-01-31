@@ -86,13 +86,14 @@ mongoose.connect(config.mongodb);
 //require('./lib/Models/Populate').populate();
 
 // Setup server
-var app = express.createServer();
+var app = express();
 app.listen(config.port);
 var io = require('./lib/chat.js')(app);  //Remove it?
 var assetMiddleware = require('./lib/asset.js');
 app.configure(function() {
 	app.set('views', __dirname+'/views');
 	app.set('view options', {layout:false});
+//	app.engine('.html', mustache({cache: true}).render);
 	//Login?
 	app.use(express.bodyParser());
 	app.use(express.cookieParser());
@@ -101,42 +102,53 @@ app.configure(function() {
 	app.use(express.session({'store':sessionStore, secret:config.sessionSecret}));
 	app.use(passport.initialize());
 	app.use(passport.session()); //For persistent login sessions
-	app.use(staticdir, 	express.static(__dirname+staticdir));
-	app.use(webdir, 	express.static(__dirname+webdir));
-	app.use(iphonedir,	express.static(__dirname+iphonedir));
-	app.use(mobiledir,	express.static(__dirname+mobiledir));
+//	app.use(express.staticCache());
+//	app.use(staticdir, 	express.static(__dirname+staticdir));
+//	app.use(webdir, 	express.static(__dirname+webdir));
+//	app.use(iphonedir,	express.static(__dirname+iphonedir));
+//	app.use(mobiledir,	express.static(__dirname+mobiledir));
+	app.use(express.static(__dirname+staticdir));
+	app.use(express.static(__dirname+webdir));
+	app.use(express.static(__dirname+iphonedir));
+	app.use(express.static(__dirname+mobiledir));
 	app.use(app.router);
+	
+	//setup the errors
+	app.use(function(err, req, res, next){
+		console.log(res);
+		// if an error occurs Connect will pass it down
+		// through these "error-handling" middleware
+		// allowing you to respond however you like
+		if (err instanceof NotFound) {
+			res.status(404).locals({
+				title:'404 - Not Found',
+				description:'',
+				author:'',
+				analyticssiteid:'XXXXXXX'
+			}).render('404.jade');
+			
+		} else {
+			res.status(500).locals({
+				title:'The Server Encountered an Error',
+				description:'',
+				author:'',
+				analyticssiteid:'XXXXXXX',
+				error:err
+			}).render('500.jade');
+		}
+	});
 });
 
+//dynamicHelpers Removed in express 3.0
 // Make assets available to index.ejs
-app.dynamicHelpers({
-	'assetsCache': function(req, res) {
-		return assetMiddleware.cacheHashes;
-	},
-	'isProduction': function(req, res) {
-		return 'production' === config.environment;
-	}
-});
-
-//setup the errors
-app.error(function(err, req, res, next) {
-	if (err instanceof NotFound) {
-		res.render('404.jade', {locals:{
-			title:'404 - Not Found',
-			description:'',
-			author:'',
-			analyticssiteid:'XXXXXXX'
-		}, status:404});
-	} else {
-		res.render('500.jade', {locals:{
-			title:'The Server Encountered an Error',
-			description:'',
-			author:'',
-			analyticssiteid:'XXXXXXX',
-			error:err
-		}, status:500});
-	}
-});
+//app.dynamicHelpers({
+//	'assetsCache': function(req, res) {
+//		return assetMiddleware.cacheHashes;
+//	},
+//	'isProduction': function(req, res) {
+//		return 'production' === config.environment;
+//	}
+//});
 
 
 ///////////////////////////////////////////

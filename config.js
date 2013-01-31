@@ -1,5 +1,5 @@
 module.exports = {
-	sessionSecret: 'your secret',
+	sessionSecret: 'thisismysecret',
 	port: 8080,
 	uri: 'http://localhost:8080', // Without trailing /
     redis: {
