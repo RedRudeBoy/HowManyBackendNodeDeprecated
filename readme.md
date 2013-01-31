@@ -1,67 +1,90 @@
-# Node Backbone Sample Project #
+# How Many Days #
+How Many Days have been since... ~ How many days have passed since...
 
-It is a sample project for a Node/HTML5 application optimized separately for desktop browsers (web), generic mobile platforms using jQuery Mobile (jquerymobile) and iPhone (iphone). Its server side project is based on [robrighter / node-boilerplate](https://github.com/robrighter/node-boilerplate) and its client side projects are based on [ccoenraets / backbone-directory](https://github.com/ccoenraets/backbone-directory).
+## The Application ##
+A la recerca de possibles necessitats,
+ i les seves solucions respectives, m'he dit...
 
-### [Try It Here](http://nodebackbone-vinkaga.dotcloud.com/) ###
-Try it out for different devices using Google Chrome's built-in user-agent switcher. [Read more.](http://www.learnwithnirab.com/2012/01/how-to-use-google-chromes-built-in-user.html)
+Quan cullons fa que no rego les plantes?
+Quants dies fa que no visito l'àvia?
+Quants dies fa que no llegeixo?
+Quants mesos fa que no faig una escapada?
 
-## Goals ##
-1. Quickly get started with a Node/Backbone application
-2. Optimize separately for browsers, iphone and other mobile devices
-3. Serve pages optimized for the client using the user agent string
-4. Serve assets compressed in production but uncompressed during development
-5. Chat capability (enabled on browsers)
-6. BDD tests
-7. Easily deployable on a Joyent Node SmartMachine
+### [Try It Here](http://www.cat/) ###
+
+## My Goals ##
+1. Get started with a Node/Backbone application
+1.1. Optimize separately for browsers and mobile devices
+1.2. Serve assets compressed in production but uncompressed during development
+2. BDD tests
+3. Use always free standars & reusable code (vCal,json,templates...)
+4. Storage with MongoDB & Redis
+5. Easily deployable
 
 ### Status ###
-1. Browser version (/web) working
-2. iPhone version (/iphone) working
-3. Android/other mobile version (/jquerymobile) working
-4. BDD tests - need more tests
+1. Browser version (/web) - @ToDo
+2. Mobile version (/jquerymobile) - @ToDO
+3. BDD tests - @ToDo
+4. Assetic - @ToDo
+
+## Software architecture ##
+My initial boilerplates was: node-backbone, express, locomotive.  
+I also look at chaplin (I'm not ready for coffescript...I love semicolons), socketstream (in this project, I thought that sockets are unnecessary) & persevere (rhino? RingoJS? JSGI? WTF?).
+Folder Hierarchy
+/app				//All the code specific for this app
+    /controllers	//Logic of the app, act as middleware
+    /models			//Stores
+    /routes			//Redirect an external petition to the right controller
+    /views			//Js templates
+	asset.js		//Define the files necessaries for the client
+/lib
+	useragent.js	//Little middleware for recognize the requests from mobile browsers
+/public				//Public files like: images, js, css...
+/test				//Testing suite
+    /functional
+    /unit
+LICENSE				//Free source, free code, free pull request (but obviously "AS IS")
+Makefile			//Add a "make test" target
+Procfile			//For easy deploy in Joyent Node SmartMachine
+app.js				//The server init file
+config.js			//Actual configurations of the app
+config.sample.js	//Example configuration file
+package.json		//For npm install
+readme.md			//Infinite loop alert!
 
 ## Technologies ##
+### Protocols ###
+1. [iCal/vCalendar](http://tools.ietf.org/html/rfc5545) - [Used and supported by a large number of products (gmail, hotmail, apple...)](http://en.wikipedia.org/wiki/ICalendar)
+2. [¿json-schema?](http://json-schema.org/calendar) - Another calendar protocol, interesting with [backbone-schema](https://github.com/salsita/backbone-schema)
+3. REST(full?) (Backbone)
+4. webfinger?
+5. ajax
+
 ### Server ###
 1. Node
-2. Express - web framework and router
-3. Mongoose/MongoDB - for persistence
-4. Redis - for sessions
-5. Socket.io - for chat etc
-6. Jade - only for error pages
-7. EJS - for serving production/development index
-8. Mocha - BDD testing framework
+2. [Express](http://expressjs.com/api.html) - web framework and router
+3. [¿Locomotive?](http://locomotivejs.org/guide) - MVC for nodejs
+4. Mongoose/MongoDB - for persistence, I spend a lot of time choosing between mongo & couch, I decide to use mongo for respect the REST architecture, but... Backbone-PouchDB looks very nice.
+5. Redis - for sessions
+6. Twig & Jade  - template engine
+7. EJS? - for serving production/development index
+8. Mocha? - BDD testing framework
 
 ### Client ###
 1. HTML5
-2. Backbone
-3. jQuery
-4. Underscore
+2. [Backbone](https://github.com/documentcloud/backbone) - MVC for browser
+4. [Underscore](https://github.com/documentcloud/underscore) - JS Utils
+3. jQuery - Cross-browser compatibility for DOM manipulation, ajax...
 5. Twitter Bootstrap (on browsers)
-6. jQuery Mobile (on generic mobile platforms)
+6. jQuery Mobile (on mobile platforms)
 
-## The Application ##
 
-It is a simple Employee Directory application that allows you to look up employees by name, view the details of an employee, and navigate up and down the Org Chart by clicking the employee’s manager or any of his/her direct reports.
-
-There are four versions of the application available in this repository:
-
-1. Backbone.js + Twitter Bootstrap (located in the [/web](https://github.com/vinkaga/node-backbone/tree/master/web) directory). This version adds primitive chat to the pages.
-	- Read more about original MySQL version [here](http://coenraets.org/blog/2012/02/sample-app-with-backbone-js-and-twitter-bootstrap/)
-2. Backbone.js + jQuery Mobile (located in the [/jquerymobile](https://github.com/vinkaga/node-backbone/tree/master/jquerymobile) directory).
-	- Read more about original MySQL version [here](http://coenraets.org/blog/2012/03/employee-directory-sample-app-with-backbone-js-and-jquery-mobile/)
-3. Backbone.js + native-looking iPhone skins (located in the [/iphone](https://github.com/vinkaga/node-backbone/tree/master/iphone) directory).
-	- Read more about original MySQL version [here](http://coenraets.org/blog/2012/03/crafting-native-looking-ios-apps-with-html-backbone-js-and-phonegap/)
-4. Backbone.js + native-looking iPhone skins and a local database implementation (located in the [/localdb](https://github.com/vinkaga/node-backbone/tree/master/localdb) directory).
-    - NOT DEBUGGED
-	- Read more about original MySQL version [here](http://coenraets.org/blog/2012/04/building-mobile-apps-with-html-and-a-local-database/)
-	- Try original MySQL version [here](http://coenraets.org/backbone/directory/localdb/)
-
-### Set Up ###
+### Installation ###
 
 1. Install and run MongoDB
 2. Install and run Redis.io
-3. Edit config.js if you are running MongoDB or Redis.io from another machine or non-default port
-4. Start server by typing "node server.js"
+3. Create your own file config.js based on config.sample.js, check if you are running MongoDB or Redis.io from another machine or non-default port
+4. Start server by typing "node app.js"
 
-### Trying Out ###
+### Try out mobile version on a desktop browser ###
 You can try out different versions of this application using Google Chrome's built-in user-agent switcher. [Read more.](http://www.learnwithnirab.com/2012/01/how-to-use-google-chromes-built-in-user.html)

@@ -1,35 +1,33 @@
 {
-	"name":"node-backbone",
+	"name": "express-HM",
 	"description":"How Many Days has it been since...",
-	"author": "we <we@we.we>",
-	"version":"0.0.1",
-	"contributors": [
-		{"dan":"Nofrost"},
-		{"doc/napo":"arnaupou"},
-		{"lenin":"redrudeboy"}
-	],
+	"author": {
+		"name": "RedRudeBoy / Leninux",
+		"email": "redrudeboy@gmail.com"
+	},
+	"version": "0.0.1",
 	"license": "MIT",
 	"repository" : {
 		"type":"git", 
-		"url":"https://github.com/weart/node-backbone"
+		"url":"https://github.com/redrudeboy/express"
 	},
-	"main": "./server.js",
-	"dependencies":{
-		"connect":">=2.1.2",
+	"readmeFilename": "readme.md",
+	"private": true,
+	"main": "./app.js",
+	"scripts": {
+		"start": "node app",
+		"test": "make test"
+	},
+	"dependencies": {
 		"express": "3.x",
+		"connect": "2.x",
+		"connect-redis" : "1.4.5",
 		"connect-assetmanager":">=0.0.27",
 		"connect-assetmanager-handlers" : ">=0.0.18",
-		"jade":">=0.24.0",
-		"ejs" : ">=0.7.1",
-		"twig": "*",
-		"passport": "*",
-		"passport-local": "*",
-		"connect-redis" : ">=1.3.0",
-		"mongoose":">=2.5.14",
-		"express-mongoose-resource": "*",
-		"mongodb": ">=1.1.11",
-		"bson": ">=0.0.4",
-		"socket.io":">=0.9.5"
+		"mongodb": "1.x",
+		"jade": "*",
+		"ect": "0.4.*",
+		"less-middleware": "*"
 	},
 	"devDependencies": {
 		"vows":">=0.6.2",
@@ -38,24 +36,14 @@
 		"request":">=2.9.x",
 		"soda":">=0.2.5"
 	},
-	"test": "make test",
-	"mappings": {
-		"express-mongoose-resource": "https://github.com/panta/express-mongoose-resource",
-		"twig": "https://github.com/justjohn/twig.js"
-	},
 	"engine":"node >= 0.6.12",
 	"keywords": [
 		"HowMany",
 		"HowManyDays",
-		"rest",
 		"vcal",
-		"mongoose",
+		"ical",
+		"rest",
 		"mongodb",
-		"node",
-		"node-backbone",
-		"jQueryMobile",
-		"express",
-		"connect",
-		"assetmanager"
+		"redis"
 	]
 }

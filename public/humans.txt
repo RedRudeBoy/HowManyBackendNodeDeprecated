@@ -1,0 +1,21 @@
+# humanstxt.org
+# The humans responsible & technology colophon
+
+/* CREATED BY */
+	Arnau-Leninux / RedRudeBoy
+	From: Barcelona, Catalonia, Iberian Peninsula, Europe, World
+
+/* CODE AT */
+	https://github.com/RedRudeBoy/RedRudeBoy.git
+
+/* SITE */
+	Last update: 22/01/2013
+	Language: Català / Castellano / English
+	Doctype: HTML5
+	IDE: Netbeans
+
+/* THANKS */
+	All the developers that give their source code for free
+
+/* MORE INFO */
+	@see: readme.md

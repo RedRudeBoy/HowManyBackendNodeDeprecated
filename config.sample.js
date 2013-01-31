@@ -1,7 +1,7 @@
 module.exports = {
 	sessionSecret: 'thisismysecret',
-	uri: process.env.IP || 'http://localhost:', // Without trailing /
 	port: 8080,
+	uri: 'http://localhost:8080', // Without trailing /
     redis: {
         host: 'localhost',
         port: 6379
@@ -15,6 +15,5 @@ module.exports = {
 
 if (module.exports.environment == 'production') {
 	module.exports.port = process.env.PORT || 80; // Joyent SmartMachine uses process.env.PORT
+    module.exports.uri = 'http://localhost:'+module.exports.port;
 }
-
-module.exports.uri += module.exports.port;
