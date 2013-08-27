@@ -4,8 +4,9 @@
  */
 var express = require('express')
   , redisStore = require('connect-redis')(express)
+//  , mongoose = require('mongoose')
   , config = require('./config.js')
-  , routing = require('./app/routes/routing')
+  , routing = require('./app/routes/express/routing')
   , http = require('http')
   , path = require('path');
 
@@ -22,7 +23,7 @@ var app = express();
  * Init storages
  */
 var sessionStore = new redisStore(config.redis);
-//config.mongodb
+//mongoose.connect(config.mongodb);
 
 
 app.configure(function(){

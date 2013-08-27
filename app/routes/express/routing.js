@@ -14,7 +14,7 @@ module.exports = function(app){
 //	app.get('/', helloWorld);
 	
 	//Routes have all app context for apply the correct views
-	routes_pages(app);
+	//routes_pages(app);
 	
 	//User & vCal are middleware
 	app.use(routes_user);
@@ -39,7 +39,7 @@ function NotFound(msg) {
 	Error.call(this, msg);
 	Error.captureStackTrace(this, arguments.callee);
 }
-
+/*
 function helloWorld (req,res,next) {
 	console.log('helloWorld!');
 	console.log(req.agent);
@@ -57,3 +57,4 @@ function helloWorld (req,res,next) {
 		//Render a view (view, [locals], callback)
 //		.render('index', { title: 'Express' });
 }
+*/

@@ -1,7 +1,7 @@
 /**
  * Example from Turbo87/locomotive-passport-boilerplate
  * https://raw.github.com/Turbo87/locomotive-passport-boilerplate/master/app/models/account.js
- * But I chamge the name of the schema from account to user
+ * But I change the name of the schema from account to user
  * 
  * @use: mongoose - mongoDB
  */

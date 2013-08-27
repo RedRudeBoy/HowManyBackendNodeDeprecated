@@ -18,7 +18,7 @@ PagesController.homePage = function (req, res) {
 	//Congratulations
 	
 	//Configuration
-PagesController.
+//PagesController.
 
 
 module.exports = PagesController;

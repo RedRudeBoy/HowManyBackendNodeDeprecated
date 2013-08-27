@@ -24,9 +24,12 @@
 		"connect-redis" : "1.4.5",
 		"connect-assetmanager":">=0.0.27",
 		"connect-assetmanager-handlers" : ">=0.0.18",
+		"consolidate": "0.8.0",
+		"twigjs": "*",
 		"mongodb": "1.x",
+		"mongoose": "*",
+		"everyauth": "git://github.com/bnoguchi/everyauth.git#express3",
 		"jade": "*",
-		"ect": "0.4.*",
 		"less-middleware": "*"
 	},
 	"devDependencies": {

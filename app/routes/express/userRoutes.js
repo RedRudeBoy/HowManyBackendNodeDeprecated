@@ -1,4 +1,8 @@
+/**
+ * Using everyauth & mongoose model
+ */
 
+var 
 /*
  * GET users listing.
  */

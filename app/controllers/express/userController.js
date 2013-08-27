@@ -3,7 +3,7 @@
  *
  * Example from Turbo87/locomotive-passport-boilerplate
  * https://raw.github.com/Turbo87/locomotive-passport-boilerplate/master/app/controllers/account_controller.js
- * But I chamge the name of the controller from account to user
+ * But I change the name of the controller from account to user
  * 
  * @use: locomotive & passport
  */
